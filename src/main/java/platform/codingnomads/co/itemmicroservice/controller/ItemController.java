@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import platform.codingnomads.co.itemmicroservice.model.BatchItemRequest;
 import platform.codingnomads.co.itemmicroservice.model.Item;
 import platform.codingnomads.co.itemmicroservice.service.ItemService;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/item")
@@ -25,6 +28,12 @@ public class ItemController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getItemById(@PathVariable Long id) {
         return ResponseEntity.ok(itemService.getItemById(id));
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<Map<Long, Item>> getItemsByIdList(@RequestBody BatchItemRequest request) {
+        Map<Long, Item> items = itemService.getItemsByIdList(request.getItemIds());
+        return ResponseEntity.ok(items);
     }
 
     @PostMapping

@@ -6,4 +6,5 @@ import platform.codingnomads.co.itemmicroservice.model.Item;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
+
 }
